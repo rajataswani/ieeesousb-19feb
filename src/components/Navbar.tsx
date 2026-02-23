@@ -33,7 +33,8 @@ const NAV_ITEMS: NavItem[] = [
     title: "Events",
     children: [
       { title: "2024", href: "https://ieee.socet.edu.in/?author=0" },
-      { title: "2025", href: "/events" },
+      { title: "2025", href: "/events?year=2025" },
+      { title: "2026", href: "/events?year=2026" },
     ],
   },
   {
@@ -73,6 +74,7 @@ export default function Navbar() {
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
+  const isDark = theme === "dark";
   const handleMobileDropdownToggle = (title: string) => {
     setOpenDropdown((prev) => (prev === title ? null : title));
   };
@@ -184,8 +186,20 @@ export default function Navbar() {
                 size="icon"
                 aria-label="Toggle theme"
                 onClick={toggleTheme}
+                className="relative rounded-full border border-border/70 bg-background/70 hover:bg-accent"
               >
-                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                <Sun
+                  className={cn(
+                    "h-5 w-5 transition-all duration-300",
+                    isDark ? "rotate-0 scale-100 text-amber-400" : "rotate-90 scale-0 absolute"
+                  )}
+                />
+                <Moon
+                  className={cn(
+                    "h-5 w-5 transition-all duration-300",
+                    isDark ? "-rotate-90 scale-0 absolute" : "rotate-0 scale-100 text-slate-700 dark:text-slate-200"
+                  )}
+                />
               </Button>
             </div>
           </nav>

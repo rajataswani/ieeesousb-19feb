@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 interface FirestoreEvent {
   id: string;
@@ -21,6 +21,8 @@ interface FirestoreEvent {
 export default function Events() {
   const [searchTerm, setSearchTerm] = useState("");
   const [events, setEvents] = useState<FirestoreEvent[]>([]);
+  const [searchParams] = useSearchParams();
+  const selectedYear = searchParams.get("year");
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -43,10 +45,20 @@ export default function Events() {
     fetchEvents();
   }, []);
 
-  const filteredEvents = events.filter((event) =>
-    event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    event.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredEvents = events.filter((event) => {
+    const matchesSearch =
+      event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+    if (!selectedYear) return matchesSearch;
+
+    const parsedYear = new Date(event.date).getFullYear();
+    const matchesYear =
+      (!Number.isNaN(parsedYear) && parsedYear.toString() === selectedYear) ||
+      event.date.includes(selectedYear);
+
+    return matchesSearch && matchesYear;
+  });
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -55,7 +67,9 @@ export default function Events() {
       <main className="flex-grow pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Events</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              {selectedYear ? `Events ${selectedYear}` : "Events"}
+            </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Discover our upcoming and past events, workshops, and conferences designed to enhance your technical knowledge and professional network.
             </p>
