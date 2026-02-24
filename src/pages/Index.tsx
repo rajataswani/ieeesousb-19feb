@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import HeroSection from "@/components/HeroSection";
 import WhyJoinSection from "@/components/WhyJoinSection";
+import FAQButtonSection from "@/components/FAQButtonSection";
 import CountUpSection from "@/components/CountUpSection";
 import FounderMessage from "@/components/FounderMessage";
 import EventsSection from "@/components/EventsSection";
@@ -51,6 +52,7 @@ export default function Index() {
     <PageLayout>
       <HeroSection />
       <WhyJoinSection />
+      <FAQButtonSection />
       <CountUpSection />
       <FounderMessage />
       <EventsSection />

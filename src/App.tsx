@@ -34,6 +34,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import EventDetails from "./pages/EventDetails";
 import AwardDetails from "./pages/AwardDetails";
 import MemberDetails from "./pages/MemberDetails";
+import Bylaws from "./pages/Bylaws";
+import FAQ from "./pages/FAQ";
+import AIAssistant from "./components/AIAssistant";
 // Ensure that the query client is correctly created
 const queryClient = new QueryClient();
 function App() {
@@ -45,11 +48,14 @@ function App() {
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <AIAssistant />
             <Routes>
               {/* Main Pages */}
               <Route path="/" element={<Index />} />
               <Route path="/events" element={<Events />} />
               <Route path="/awards" element={<Awards />} />
+              <Route path="/bylaws" element={<Bylaws />} />
+              <Route path="/faq" element={<FAQ />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/join" element={<Join />} />
               {/* About Pages */}

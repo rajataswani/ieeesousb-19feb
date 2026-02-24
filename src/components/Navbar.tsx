@@ -50,6 +50,10 @@ const NAV_ITEMS: NavItem[] = [
     href: "/awards",
   },
   {
+    title: "Bylaws",
+    href: "/bylaws",
+  },
+  {
     title: "Contact Us",
     href: "/contact",
   }
