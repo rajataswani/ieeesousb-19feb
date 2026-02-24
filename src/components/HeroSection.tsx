@@ -55,13 +55,13 @@ export default function HeroSection() {
           className="mb-6"
           style={{ transform: `translateY(${scrollY * -0.15}px)` }}
         >
-          <span className="block text-foreground dark:text-white text-4xl md:text-6xl font-bold tracking-tight">
+          <span className="block text-white text-4xl md:text-6xl font-bold tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]">
             <span className="reveal fade-up inline-block">Welcome&nbsp;to</span>
           </span>
-          <span className="block text-foreground dark:text-white text-4xl md:text-6xl font-bold tracking-tight">
+          <span className="block text-white text-4xl md:text-6xl font-bold tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]">
             <span className="reveal fade-up delay-2 inline-block">Silver&nbsp;Oak&nbsp;University</span>
           </span>
-          <span className="block text-foreground dark:text-white text-4xl md:text-6xl font-bold tracking-tight">
+          <span className="block text-white text-4xl md:text-6xl font-bold tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]">
             <span className="reveal fade-up delay-3 inline-block">IEEE&nbsp;Student&nbsp;Branch</span>
           </span>
         </div>
