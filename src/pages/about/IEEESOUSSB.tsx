@@ -52,6 +52,16 @@ export default function IEEESOUSSB() {
                 Since its inception, IEEE SOU SB has organized numerous impactful events, creating an intellectually stimulating environment where students engage with cutting-edge technologies, research opportunities, and industry-driven insights. Our commitment to innovation, collaboration, and professional excellence continues to empower students to excel in their careers and shape the future of technology.
               </p>
             </section>
+
+            {/* Journey Button Section */}
+            <div className="mt-16 pt-12 border-t border-border flex justify-center animate-fade-in-up animation-delay-1000">
+              <a
+                href="/about/ieee-sou-sb-journey"
+                className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors duration-300 shadow-lg hover:shadow-xl"
+              >
+                Explore Our Journey
+              </a>
+            </div>
           </div>
         </div>
       </main>

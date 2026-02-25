@@ -16,6 +16,8 @@ import NotFound from "./pages/NotFound";
 // About Pages
 import IEEE from "./pages/about/IEEE";
 import IEEESOUSSB from "./pages/about/IEEESOUSSB";
+import IEEESOUSSBJRNY from "./pages/about/IEEESOUSSBJRNY";
+import IEEESOUSSBJRNYLoop from "./pages/about/IEEESOUSSBJRNYLoop";
 import IEEEOUSSBWIE from "./pages/about/IEEEOUSSBWIE";
 import IEEESOUSPSSBC from "./pages/about/IEEESOUSPSSBC";
 import IEEESOUSCSSBC from "./pages/about/IEEESOUSCSSBC";
@@ -55,6 +57,8 @@ function App() {
               {/* About Pages */}
               <Route path="/about/ieee" element={<IEEE />} />
               <Route path="/about/ieee-sou-sb" element={<IEEESOUSSB />} />
+              <Route path="/about/ieee-sou-sb-journey" element={<IEEESOUSSBJRNY />} />
+              <Route path="/about/ieee-sou-sb-journey-loop" element={<IEEESOUSSBJRNYLoop />} />
               <Route path="/about/ieee-sou-wie-sb-ag" element={<IEEEOUSSBWIE />} />
               <Route path="/about/ieee-sou-sps-sbc" element={<IEEESOUSPSSBC />} />
               <Route path="/about/ieee-sou-cs-sbc" element={<IEEESOUSCSSBC />} />
