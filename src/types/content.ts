@@ -20,3 +20,11 @@ export type Event = {
     winners: string; // Could be a list or comma-separated string based on your data structure
     location: string;
   };
+  export type JourneyItem = {
+    id: string;
+    title: string;
+    description: string;
+    imageUrl: string;
+    year?: string;
+    details: string;
+  };
