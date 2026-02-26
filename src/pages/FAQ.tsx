@@ -1,5 +1,9 @@
 import Navbar from "@/components/Navbar";
+<<<<<<< HEAD
 import { ChevronRight } from "lucide-react";
+=======
+import { HelpCircle, ChevronRight } from "lucide-react";
+>>>>>>> upstream/master
 
 export const metadata = {
     title: "FAQ - IEEE SOU SB",
@@ -82,6 +86,18 @@ export default function FAQ() {
                 {/* Page Header */}
                 <div className="border-b border-slate-100 dark:border-slate-800 pb-10 mb-10">
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+<<<<<<< HEAD
+=======
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-10 h-10 rounded-full bg-[#00629B]/10 flex items-center justify-center">
+                                <HelpCircle className="h-5 w-5 text-[#00629B] dark:text-[#60B4E8]" />
+                            </div>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-[#00629B] dark:text-[#60B4E8]">
+                                IEEE Silver Oak University Student Branch
+                            </p>
+                        </div>
+
+>>>>>>> upstream/master
                         <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white tracking-tight mb-3">
                             Frequently Asked Questions
                         </h1>

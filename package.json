@@ -8,8 +8,12 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
+<<<<<<< HEAD
     "preview": "vite preview",
     "server": "npx ts-node --esm server/index.ts"
+=======
+    "preview": "vite preview"
+>>>>>>> upstream/master
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -41,13 +45,19 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@tanstack/react-query": "^5.74.4",
+<<<<<<< HEAD
     "@types/nodemailer": "^7.0.11",
+=======
+>>>>>>> upstream/master
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "cors": "^2.8.5",
     "date-fns": "^3.6.0",
+<<<<<<< HEAD
     "dotenv": "^17.3.1",
+=======
+>>>>>>> upstream/master
     "embla-carousel-react": "^8.3.0",
     "express": "^5.1.0",
     "firebase": "^11.6.0",
@@ -55,7 +65,10 @@
     "lucide-react": "^0.462.0",
     "mongoose": "^8.13.2",
     "next-themes": "^0.3.0",
+<<<<<<< HEAD
     "nodemailer": "^8.0.1",
+=======
+>>>>>>> upstream/master
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
@@ -74,8 +87,11 @@
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@tailwindcss/typography": "^0.5.15",
+<<<<<<< HEAD
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+=======
+>>>>>>> upstream/master
     "@types/node": "^22.5.5",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

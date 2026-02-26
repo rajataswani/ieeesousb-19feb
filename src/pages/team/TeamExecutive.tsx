@@ -1,13 +1,21 @@
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
 import { Search, Linkedin, ChevronLeft, ChevronRight } from "lucide-react";
+=======
+import { Search, Linkedin } from "lucide-react";
+>>>>>>> upstream/master
 import Navbar from "@/components/Navbar";
 import { Input } from "@/components/ui/input";
 import { db } from "@/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
+<<<<<<< HEAD
 const YEARS = Array.from({ length: 10 }, (_, i) => 2017 + i); // [2017 … 2026]
 
 const SOCIETY_TITLES: Record<string, string> = {
+=======
+const SOCIETY_TITLES = {
+>>>>>>> upstream/master
   SB: "Student Branch",
   WIE: "Women in Engineering",
   SPS: "Signal Processing Society",
@@ -15,6 +23,7 @@ const SOCIETY_TITLES: Record<string, string> = {
   SIGHT: "Special Interest Group on Humanitarian Technology",
 };
 
+<<<<<<< HEAD
 const POSITION_ORDER: Record<string, number> = {
   Chairperson: 1,
   "Vice-Chairperson": 2,
@@ -38,6 +47,28 @@ export default function TeamExecutive() {
         where("year", "==", String(selectedYear))
       );
       const snapshot = await getDocs(q);
+=======
+const POSITION_HIERARCHY = [
+  "Chairperson",
+  "Vice-Chairperson",
+  "Secretary",
+  "Treasurer",
+  "Webmaster",
+];
+
+// Using a consistent hover effect for all members instead of different colors
+const HOVER_EFFECT = "hover:bg-gray-50 dark:hover:bg-gray-800 hover:scale-[1.02] transition-transform";
+
+export default function TeamExecutive() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [executiveMembers, setExecutiveMembers] = useState<Record<string, any[]>>({});
+
+  useEffect(() => {
+    async function fetchExecutiveMembers() {
+      const membersRef = collection(db, "members");
+      const q = query(membersRef, where("type", "==", "executive"));
+      const querySnapshot = await getDocs(q);
+>>>>>>> upstream/master
 
       const grouped: Record<string, any[]> = {
         SB: [],
@@ -47,12 +78,26 @@ export default function TeamExecutive() {
         SIGHT: [],
       };
 
+<<<<<<< HEAD
       snapshot.forEach((doc) => {
         const data = doc.data();
         let pos = data.position;
         if (pos?.toLowerCase() === "vice chairperson") pos = "Vice-Chairperson";
         if (grouped[data.society]) {
           grouped[data.society].push({ ...data, position: pos, id: doc.id });
+=======
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const societyType = data.society;
+
+        let standardizedPosition = data.position;
+        if (standardizedPosition.toLowerCase() === "vice chairperson") {
+          standardizedPosition = "Vice-Chairperson";
+        }
+
+        if (grouped[societyType]) {
+          grouped[societyType].push({ ...data, position: standardizedPosition, id: doc.id });
+>>>>>>> upstream/master
         }
       });
 
@@ -60,6 +105,7 @@ export default function TeamExecutive() {
     }
 
     fetchExecutiveMembers();
+<<<<<<< HEAD
   }, [selectedYear]);
 
   // ── helpers ──────────────────────────────────────────────────────────────
@@ -91,11 +137,40 @@ export default function TeamExecutive() {
   ];
 
   // ── render ───────────────────────────────────────────────────────────────
+=======
+  }, []);
+
+  const filterMembers = (members: any[]) =>
+    members.filter(
+      (member) =>
+        member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        member.position.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+  const sortMembersByPosition = (members: any[]) => {
+    return members.sort((a, b) => {
+      const positionOrder: Record<string, number> = {
+        Chairperson: 1,
+        "Vice-Chairperson": 2,
+        Secretary: 3,
+        Treasurer: 4,
+        Webmaster: 5,
+      };
+
+      const aPosIndex = positionOrder[a.position] ?? 999;
+      const bPosIndex = positionOrder[b.position] ?? 999;
+
+      return aPosIndex - bPosIndex;
+    });
+  };
+
+>>>>>>> upstream/master
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-[#0F172A]">
       <Navbar />
       <main className="flex-grow pt-24 pb-16 animate-fade-in bg-white dark:bg-[#0F172A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<<<<<<< HEAD
 
           {/* Page heading */}
           <div className="mb-10 text-center">
@@ -103,10 +178,18 @@ export default function TeamExecutive() {
               Executive Team
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+=======
+          <div className="mb-12 text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black dark:text-white">
+              Executive Team
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto dark:text-muted-foreground-dark">
+>>>>>>> upstream/master
               Meet the executive members of each IEEE society.
             </p>
           </div>
 
+<<<<<<< HEAD
           {/* ── Year Carousel ── */}
           <div className="flex items-center justify-center gap-4 mb-10">
             {/* Left arrow */}
@@ -170,6 +253,8 @@ export default function TeamExecutive() {
           </div>
 
           {/* Search */}
+=======
+>>>>>>> upstream/master
           <div className="flex justify-center mb-12">
             <div className="relative w-full max-w-md">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
@@ -183,11 +268,19 @@ export default function TeamExecutive() {
             </div>
           </div>
 
+<<<<<<< HEAD
           {/* Member grids */}
           {Object.entries(SOCIETY_TITLES).map(([societyKey, title]) => {
             const members = filterMembers(executiveMembers[societyKey] || []);
             if (members.length === 0) return null;
             const sorted = sortMembers(members);
+=======
+          {Object.entries(SOCIETY_TITLES).map(([societyKey, title]) => {
+            const members = filterMembers(executiveMembers[societyKey] || []);
+            if (members.length === 0) return null;
+
+            const sortedMembers = sortMembersByPosition(members);
+>>>>>>> upstream/master
 
             return (
               <div key={societyKey} className="mb-16">
@@ -195,12 +288,22 @@ export default function TeamExecutive() {
                   {title}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<<<<<<< HEAD
                   {sorted.map((member) => (
                     <div
                       key={member.id}
                       className="rounded-lg overflow-hidden shadow-sm transition-all duration-300
                         bg-white dark:bg-gray-900
                         hover:bg-gray-50 dark:hover:bg-gray-800 hover:scale-[1.02] hover:shadow-md dark:hover:shadow-lg cursor-pointer"
+=======
+                  {sortedMembers.map((member) => (
+                    <div
+                      key={member.id}
+                      className={`rounded-lg overflow-hidden shadow-sm transition-all duration-300
+                        bg-white dark:bg-gray-900
+                        ${HOVER_EFFECT}
+                        hover:shadow-md dark:hover:shadow-lg cursor-pointer`}
+>>>>>>> upstream/master
                     >
                       <div className="p-6">
                         <div className="flex items-start mb-4">
@@ -221,14 +324,27 @@ export default function TeamExecutive() {
                                   href={member.linkedin}
                                   target="_blank"
                                   rel="noopener noreferrer"
+<<<<<<< HEAD
                                   className="ml-2 text-primary hover:text-primary/80"
+=======
+                                  className="ml-2 text-primary hover:text-primary/80 dark:text-primary-dark dark:hover:text-primary-dark/80"
+>>>>>>> upstream/master
                                 >
                                   <Linkedin className="h-4 w-4" />
                                 </a>
                               )}
                             </div>
+<<<<<<< HEAD
                             <p className="text-sm text-muted-foreground">{member.position}</p>
                             <p className="text-sm text-muted-foreground">{member.education}</p>
+=======
+                            <p className="text-sm text-muted-foreground dark:text-muted-foreground-dark">
+                              {member.position}
+                            </p>
+                            <p className="text-sm text-muted-foreground dark:text-muted-foreground-dark">
+                              {member.education}
+                            </p>
+>>>>>>> upstream/master
                           </div>
                         </div>
                       </div>
@@ -238,6 +354,7 @@ export default function TeamExecutive() {
               </div>
             );
           })}
+<<<<<<< HEAD
 
           {/* Empty state */}
           {Object.values(executiveMembers).every((arr) => arr.length === 0) && (
@@ -245,6 +362,8 @@ export default function TeamExecutive() {
               <p className="text-lg">No executive members found for {selectedYear}.</p>
             </div>
           )}
+=======
+>>>>>>> upstream/master
         </div>
       </main>
     </div>

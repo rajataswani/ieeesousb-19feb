@@ -339,6 +339,7 @@ img {
 
 .heading-line.visible {
   animation: shimmerLine 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+<<<<<<< HEAD
 }
 
 /* ══════════════════════════════════════
@@ -485,4 +486,6 @@ img {
 .theme-card-emerald:hover {
   box-shadow: 0 8px 32px hsl(150 65% 42% / 0.18), inset 0 1px 0 hsl(150 65% 78% / 0.15);
   border-color: hsl(150 65% 42% / 0.45);
+=======
+>>>>>>> upstream/master
 }

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useRef } from "react";
+=======
+import { useState, useEffect } from "react";
+>>>>>>> upstream/master
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+<<<<<<< HEAD
 import { sendEmail } from "@/lib/sendEmail";
 
 export default function Join() {
@@ -64,6 +69,77 @@ export default function Join() {
     } finally {
       setIsLoading(false);
     }
+=======
+import { X } from "lucide-react";
+
+export default function Join() {
+  const [showNotification, setShowNotification] = useState(true);
+  const [customToast, setCustomToast] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (showNotification) {
+      const id = toast.info(
+        <div className="flex items-start justify-between w-full">
+          <div className="text-foreground">
+            Join IEEE form is inactive, kindly reach us at Apple Lab, B-120 for any queries
+          </div>
+          <button
+            onClick={() => toast.dismiss(id)}
+            className="ml-2 p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
+          >
+            <X size={16} />
+          </button>
+        </div>,
+        {
+          duration: 5000,
+          position: "bottom-right",
+          className:
+            "bg-background text-foreground border border-gray-200 dark:border-gray-700 shadow-lg",
+          style: {
+            fontSize: "1.1rem",
+            padding: "1.25rem",
+          },
+          onDismiss: () => setShowNotification(false),
+        }
+      );
+      setCustomToast(id ? String(id) : null);
+    }
+
+    const timer = setTimeout(() => {
+      setShowNotification(false);
+      if (customToast) {
+        toast.dismiss(customToast);
+      }
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast.info(
+      <div className="flex items-start justify-between w-full">
+        <div className="text-foreground">
+          Join IEEE form is inactive, kindly reach us at Apple Lab, B-120 for any queries
+        </div>
+        <button
+          onClick={() => toast.dismiss()}
+          className="ml-2 p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
+        >
+          <X size={16} />
+        </button>
+      </div>,
+      {
+        position: "bottom-right",
+        className:
+          "bg-background text-foreground border border-gray-200 dark:border-gray-700 shadow-lg",
+        style: {
+          fontSize: "1.1rem",
+          padding: "1.25rem",
+        },
+      }
+    );
+>>>>>>> upstream/master
   };
 
   return (
@@ -80,7 +156,11 @@ export default function Join() {
           </div>
 
           <div className="rounded-lg p-8 border border-gray-200 dark:border-gray-700 shadow-lg bg-white dark:bg-gray-900 transition-colors">
+<<<<<<< HEAD
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+=======
+            <form onSubmit={handleSubmit} className="space-y-6">
+>>>>>>> upstream/master
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name</Label>
@@ -104,11 +184,16 @@ export default function Join() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="department">Department</Label>
+<<<<<<< HEAD
                   <Select value={department} onValueChange={setDepartment}>
+=======
+                  <Select>
+>>>>>>> upstream/master
                     <SelectTrigger>
                       <SelectValue placeholder="Select department" />
                     </SelectTrigger>
                     <SelectContent>
+<<<<<<< HEAD
                       <SelectItem value="Computer Engineering">Computer Engineering</SelectItem>
                       <SelectItem value="Information Technology">Information Technology</SelectItem>
                       <SelectItem value="Electronics & Communication">Electronics &amp; Communication</SelectItem>
@@ -116,18 +201,35 @@ export default function Join() {
                       <SelectItem value="Mechanical Engineering">Mechanical Engineering</SelectItem>
                       <SelectItem value="Civil Engineering">Civil Engineering</SelectItem>
                       <SelectItem value="Other">Other</SelectItem>
+=======
+                      <SelectItem value="ce">Computer Engineering</SelectItem>
+                      <SelectItem value="it">Information Technology</SelectItem>
+                      <SelectItem value="ec">Electronics & Communication</SelectItem>
+                      <SelectItem value="ee">Electrical Engineering</SelectItem>
+                      <SelectItem value="me">Mechanical Engineering</SelectItem>
+                      <SelectItem value="civil">Civil Engineering</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+>>>>>>> upstream/master
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="semester">Semester</Label>
+<<<<<<< HEAD
                   <Select value={semester} onValueChange={setSemester}>
+=======
+                  <Select>
+>>>>>>> upstream/master
                     <SelectTrigger>
                       <SelectValue placeholder="Select semester" />
                     </SelectTrigger>
                     <SelectContent>
                       {[1, 2, 3, 4, 5, 6, 7, 8].map((sem) => (
+<<<<<<< HEAD
                         <SelectItem key={sem} value={`Semester ${sem}`}>
+=======
+                        <SelectItem key={sem} value={sem.toString()}>
+>>>>>>> upstream/master
                           Semester {sem}
                         </SelectItem>
                       ))}
@@ -136,15 +238,26 @@ export default function Join() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="year">Academic Year</Label>
+<<<<<<< HEAD
                   <Select value={academicYear} onValueChange={setAcademicYear}>
+=======
+                  <Select>
+>>>>>>> upstream/master
                     <SelectTrigger>
                       <SelectValue placeholder="Select year" />
                     </SelectTrigger>
                     <SelectContent>
+<<<<<<< HEAD
                       <SelectItem value="First Year">First Year</SelectItem>
                       <SelectItem value="Second Year">Second Year</SelectItem>
                       <SelectItem value="Third Year">Third Year</SelectItem>
                       <SelectItem value="Fourth Year">Fourth Year</SelectItem>
+=======
+                      <SelectItem value="1">First Year</SelectItem>
+                      <SelectItem value="2">Second Year</SelectItem>
+                      <SelectItem value="3">Third Year</SelectItem>
+                      <SelectItem value="4">Fourth Year</SelectItem>
+>>>>>>> upstream/master
                     </SelectContent>
                   </Select>
                 </div>
@@ -159,8 +272,13 @@ export default function Join() {
                 />
               </div>
 
+<<<<<<< HEAD
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Submitting…" : "Submit Application"}
+=======
+              <Button type="submit" className="w-full">
+                Submit Application
+>>>>>>> upstream/master
               </Button>
             </form>
           </div>

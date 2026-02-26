@@ -10,10 +10,13 @@ import InitialLoader from "@/components/InitialLoader";
 import Index from "./pages/Index";
 import Events from "./pages/Events";
 import Achievement from "./pages/Achievement";
+<<<<<<< HEAD
 import BranchAwards from "./pages/BranchAwards";
 import Newsletter from "./pages/Newsletter";
 import StudentAchievements from "./pages/StudentAchievements";
 import UpcomingEvents from "./pages/UpcomingEvents";
+=======
+>>>>>>> upstream/master
 import Contact from "./pages/Contact";
 import Join from "./pages/Join";
 import NotFound from "./pages/NotFound";
@@ -24,9 +27,12 @@ import IEEEOUSSBWIE from "./pages/about/IEEEOUSSBWIE";
 import IEEESOUSPSSBC from "./pages/about/IEEESOUSPSSBC";
 import IEEESOUSCSSBC from "./pages/about/IEEESOUSCSSBC";
 import IEEESOUSSIGHTSBG from "./pages/about/IEEESOUSSIGHTSBG";
+<<<<<<< HEAD
 import IEEESOUSSBJRNY from "./pages/about/IEEESOUSSBJRNY";
 import IEEESOUSSBJRNYLoop from "./pages/about/IEEESOUSSBJRNYLoop";
 import JourneyDetails from "./pages/about/JourneyDetails";
+=======
+>>>>>>> upstream/master
 // Team Pages
 import TeamFaculty from "./pages/team/TeamFaculty";
 import TeamAdvisory from "./pages/team/TeamAdvisory";
@@ -44,7 +50,10 @@ import MemberDetails from "./pages/MemberDetails";
 import Bylaws from "./pages/Bylaws";
 import FAQ from "./pages/FAQ";
 import AIAssistant from "./components/AIAssistant";
+<<<<<<< HEAD
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+=======
+>>>>>>> upstream/master
 // Ensure that the query client is correctly created
 const queryClient = new QueryClient();
 function App() {
@@ -56,17 +65,23 @@ function App() {
           <Toaster />
           <Sonner />
           <BrowserRouter>
+<<<<<<< HEAD
             <ScrollProgressBar />
+=======
+>>>>>>> upstream/master
             <AIAssistant />
             <Routes>
               {/* Main Pages */}
               <Route path="/" element={<Index />} />
               <Route path="/events" element={<Events />} />
               <Route path="/achievement" element={<Achievement />} />
+<<<<<<< HEAD
               <Route path="/achievement/branch-awards" element={<BranchAwards />} />
               <Route path="/achievement/newsletter" element={<Newsletter />} />
               <Route path="/achievement/student" element={<StudentAchievements />} />
               <Route path="/achievement/upcoming-events" element={<UpcomingEvents />} />
+=======
+>>>>>>> upstream/master
               <Route path="/achievements" element={<Navigate to="/achievement" replace />} />
               <Route path="/awards" element={<Navigate to="/achievement" replace />} />
               <Route path="/bylaws" element={<Bylaws />} />
@@ -77,9 +92,12 @@ function App() {
               <Route path="/about/ieee" element={<IEEE />} />
               <Route path="/about/ieee-sou-sb" element={<IEEESOUSSB />} />
               <Route path="/about/ieee-sou-wie-sb-ag" element={<IEEEOUSSBWIE />} />
+<<<<<<< HEAD
               <Route path="/about/ieee-sou-sb-journey" element={<IEEESOUSSBJRNY />} />
               <Route path="/about/ieee-sou-sb-journey-loop" element={<IEEESOUSSBJRNYLoop />} />
               <Route path="/about/ieee-sou-sb-journey-loop/:id" element={<JourneyDetails />} />
+=======
+>>>>>>> upstream/master
               <Route path="/about/ieee-sou-sps-sbc" element={<IEEESOUSPSSBC />} />
               <Route path="/about/ieee-sou-cs-sbc" element={<IEEESOUSCSSBC />} />
               <Route path="/about/ieee-sou-sight-sbg" element={<IEEESOUSSIGHTSBG />} />

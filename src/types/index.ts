@@ -9,7 +9,15 @@ export type NavItem = {
   title: string;
   href?: string;
   description?: string;
+<<<<<<< HEAD
   children?: NavItem[];
+=======
+  children?: {
+    title: string;
+    href: string;
+    description?: string;
+  }[];
+>>>>>>> upstream/master
 };
 
 export type Event = {

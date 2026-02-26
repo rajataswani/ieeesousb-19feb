@@ -22,6 +22,7 @@ const SAMPLE_EVENTS: Event[] = [
   },
   {
     id: "2",
+<<<<<<< HEAD
     title: "Member Training Program",
     description:
       "The session by Lieutenant General Asit Mistry left the audience with a meaningful understanding of national security and the realities of India's strategic environment. His clear explanations, real-world examples and structured insights helped students grasp complex military decisions through the lens of leadership, discipline and responsibility, giving them a deeper appreciation for national service, strategic thinking and personal growth.",
@@ -30,6 +31,16 @@ const SAMPLE_EVENTS: Event[] = [
     image:
       "http://ieee.socet.edu.in/wp-content/uploads/2026/02/Volunteer-Training-Poster-1.png",
     link: `/eventdetails/`,
+=======
+    title: "SOU Talks: Leadership beyond the call of duty",
+    description:
+      "The session by Lieutenant General Asit Mistry left the audience with a meaningful understanding of national security and the realities of India's strategic environment. His clear explanations, real-world examples and structured insights helped students grasp complex military decisions through the lens of leadership, discipline and responsibility, giving them a deeper appreciation for national service, strategic thinking and personal growth.",
+    date: "December 4, 2025",
+    time: "02:00 P.M. Onwards",
+    image:
+      "http://ieee.socet.edu.in/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-20-at-2.10.53-PM.jpeg",
+    link: `/eventdetails/iCW3qDRouMMfkDAozmEY`,
+>>>>>>> upstream/master
   },
 ];
 
@@ -378,6 +389,7 @@ export default function EventsSection() {
         </div>
 
         {/* CTA */}
+<<<<<<< HEAD
         <div className="reveal pop delay-4 text-center mt-5 flex justify-center gap-3">
           <Button asChild>
             <a href="/events">View All Events</a>
@@ -385,6 +397,12 @@ export default function EventsSection() {
           <Button asChild>
             <a href="/about/ieee-sou-sb-journey-loop">Our Journey</a>
           </Button>
+=======
+        <div className="reveal pop delay-4 text-center mt-5">
+          <Button asChild>
+            <a href="/events">View All Events</a>
+          </Button>
+>>>>>>> upstream/master
         </div>
       </div>
     </>

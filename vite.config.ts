@@ -10,12 +10,15 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
     // Add history API fallback for SPA routing
     historyApiFallback: true,
+<<<<<<< HEAD
     proxy: {
       "/api": {
         target: "http://localhost:3001",
         changeOrigin: true,
       },
     },
+=======
+>>>>>>> upstream/master
   },
   plugins: [
     react(),

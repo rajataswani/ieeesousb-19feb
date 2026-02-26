@@ -1,5 +1,8 @@
 import Navbar from "@/components/Navbar";
+<<<<<<< HEAD
 import OrganizationMeta from "@/components/OrganizationMeta";
+=======
+>>>>>>> upstream/master
 
 export default function IEEE() {
   return (
@@ -13,13 +16,20 @@ export default function IEEE() {
             <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in-up">
               IEEE
             </h1>
+<<<<<<< HEAD
             <OrganizationMeta nomenclature="Institute of Electrical and Electronics Engineers" />
+=======
+>>>>>>> upstream/master
             <div className="w-24 h-1.5 bg-primary mx-auto rounded-full mb-8 animate-fade-in-up animation-delay-300" />
           </div>
 
           {/* Content Section */}
           <div className="prose dark:prose-invert max-w-none animate-fade-in-up animation-delay-500">
+<<<<<<< HEAD
             <section className="mb-12 theme-card theme-card-blue card-text-shimmer">
+=======
+            <section className="mb-12 bg-muted/30 p-8 rounded-xl shadow-lg">
+>>>>>>> upstream/master
               <h2 className="text-2xl font-semibold mb-6">IEEE History</h2>
 
               <p className="mb-4">
