@@ -9,11 +9,7 @@ export type NavItem = {
   title: string;
   href?: string;
   description?: string;
-  children?: {
-    title: string;
-    href: string;
-    description?: string;
-  }[];
+  children?: NavItem[];
 };
 
 export type Event = {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,75 +12,58 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { X } from "lucide-react";
+import { sendEmail } from "@/lib/sendEmail";
 
 export default function Join() {
-  const [showNotification, setShowNotification] = useState(true);
-  const [customToast, setCustomToast] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [department, setDepartment] = useState("");
+  const [semester, setSemester] = useState("");
+  const [academicYear, setAcademicYear] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
-    if (showNotification) {
-      const id = toast.info(
-        <div className="flex items-start justify-between w-full">
-          <div className="text-foreground">
-            Join IEEE form is inactive, kindly reach us at Apple Lab, B-120 for any queries
-          </div>
-          <button
-            onClick={() => toast.dismiss(id)}
-            className="ml-2 p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
-          >
-            <X size={16} />
-          </button>
-        </div>,
-        {
-          duration: 5000,
-          position: "bottom-right",
-          className:
-            "bg-background text-foreground border border-gray-200 dark:border-gray-700 shadow-lg",
-          style: {
-            fontSize: "1.1rem",
-            padding: "1.25rem",
-          },
-          onDismiss: () => setShowNotification(false),
-        }
-      );
-      setCustomToast(id ? String(id) : null);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = formRef.current;
+    if (!form) return;
+
+    const name = (form.querySelector("#name") as HTMLInputElement)?.value.trim();
+    const email = (form.querySelector("#email") as HTMLInputElement)?.value.trim();
+    const phone = (form.querySelector("#phone") as HTMLInputElement)?.value.trim();
+    const enrollment = (form.querySelector("#enrollment") as HTMLInputElement)?.value.trim();
+    const college = (form.querySelector("#college") as HTMLInputElement)?.value.trim();
+    const reason = (form.querySelector("#reason") as HTMLTextAreaElement)?.value.trim();
+
+    if (!name || !email) {
+      toast.error("Please fill in your name and email.");
+      return;
     }
 
-    const timer = setTimeout(() => {
-      setShowNotification(false);
-      if (customToast) {
-        toast.dismiss(customToast);
-      }
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.info(
-      <div className="flex items-start justify-between w-full">
-        <div className="text-foreground">
-          Join IEEE form is inactive, kindly reach us at Apple Lab, B-120 for any queries
-        </div>
-        <button
-          onClick={() => toast.dismiss()}
-          className="ml-2 p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
-        >
-          <X size={16} />
-        </button>
-      </div>,
-      {
-        position: "bottom-right",
-        className:
-          "bg-background text-foreground border border-gray-200 dark:border-gray-700 shadow-lg",
-        style: {
-          fontSize: "1.1rem",
-          padding: "1.25rem",
+    setIsLoading(true);
+    try {
+      await sendEmail({
+        name,
+        email,
+        phone,
+        page: "Join",
+        fields: {
+          "Enrollment Number": enrollment,
+          College: college,
+          Department: department,
+          Semester: semester,
+          "Academic Year": academicYear,
+          "Reason to Join": reason,
         },
-      }
-    );
+      });
+      toast.success("Application submitted! We'll contact you soon.");
+      form.reset();
+      setDepartment("");
+      setSemester("");
+      setAcademicYear("");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Failed to submit application.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -97,7 +80,7 @@ export default function Join() {
           </div>
 
           <div className="rounded-lg p-8 border border-gray-200 dark:border-gray-700 shadow-lg bg-white dark:bg-gray-900 transition-colors">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name</Label>
@@ -121,30 +104,30 @@ export default function Join() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="department">Department</Label>
-                  <Select>
+                  <Select value={department} onValueChange={setDepartment}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select department" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="ce">Computer Engineering</SelectItem>
-                      <SelectItem value="it">Information Technology</SelectItem>
-                      <SelectItem value="ec">Electronics & Communication</SelectItem>
-                      <SelectItem value="ee">Electrical Engineering</SelectItem>
-                      <SelectItem value="me">Mechanical Engineering</SelectItem>
-                      <SelectItem value="civil">Civil Engineering</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="Computer Engineering">Computer Engineering</SelectItem>
+                      <SelectItem value="Information Technology">Information Technology</SelectItem>
+                      <SelectItem value="Electronics & Communication">Electronics &amp; Communication</SelectItem>
+                      <SelectItem value="Electrical Engineering">Electrical Engineering</SelectItem>
+                      <SelectItem value="Mechanical Engineering">Mechanical Engineering</SelectItem>
+                      <SelectItem value="Civil Engineering">Civil Engineering</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="semester">Semester</Label>
-                  <Select>
+                  <Select value={semester} onValueChange={setSemester}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select semester" />
                     </SelectTrigger>
                     <SelectContent>
                       {[1, 2, 3, 4, 5, 6, 7, 8].map((sem) => (
-                        <SelectItem key={sem} value={sem.toString()}>
+                        <SelectItem key={sem} value={`Semester ${sem}`}>
                           Semester {sem}
                         </SelectItem>
                       ))}
@@ -153,15 +136,15 @@ export default function Join() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="year">Academic Year</Label>
-                  <Select>
+                  <Select value={academicYear} onValueChange={setAcademicYear}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select year" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="1">First Year</SelectItem>
-                      <SelectItem value="2">Second Year</SelectItem>
-                      <SelectItem value="3">Third Year</SelectItem>
-                      <SelectItem value="4">Fourth Year</SelectItem>
+                      <SelectItem value="First Year">First Year</SelectItem>
+                      <SelectItem value="Second Year">Second Year</SelectItem>
+                      <SelectItem value="Third Year">Third Year</SelectItem>
+                      <SelectItem value="Fourth Year">Fourth Year</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -176,8 +159,8 @@ export default function Join() {
                 />
               </div>
 
-              <Button type="submit" className="w-full">
-                Submit Application
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Submitting…" : "Submit Application"}
               </Button>
             </form>
           </div>

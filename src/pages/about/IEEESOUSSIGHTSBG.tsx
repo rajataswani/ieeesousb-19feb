@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import OrganizationMeta from "@/components/OrganizationMeta";
 
 export default function IEEESOUSSIGHTSBG() {
   return (
@@ -12,13 +13,14 @@ export default function IEEESOUSSIGHTSBG() {
             <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in-up">
               IEEE SOU SIGHT SBG
             </h1>
+            <OrganizationMeta ouCode="SBA20233S" nomenclature="Silver Oak University, IEEE SIGHT Student Branch Group" />
             <div className="w-24 h-1.5 bg-primary mx-auto rounded-full mb-8 animate-fade-in-up animation-delay-300" />
           </div>
 
           {/* Sections */}
           <div className="prose dark:prose-invert max-w-none">
             {/* Vision */}
-            <section className="mb-12 bg-muted/30 p-8 rounded-xl shadow-lg animate-fade-in-up animation-delay-500">
+            <section className="mb-12 theme-card theme-card-emerald animate-fade-in-up animation-delay-500">
               <h2 className="text-2xl font-semibold mb-6">Vision</h2>
               <p>
                 To leverage technology for humanitarian causes and create lasting, impactful change in underserved communities by improving access to basic resources, education, and healthcare.
@@ -26,7 +28,7 @@ export default function IEEESOUSSIGHTSBG() {
             </section>
 
             {/* Mission */}
-            <section className="mb-12 bg-muted/30 p-8 rounded-xl shadow-lg animate-fade-in-up animation-delay-700">
+            <section className="mb-12 theme-card theme-card-emerald animate-fade-in-up animation-delay-700">
               <h2 className="text-2xl font-semibold mb-6">Mission</h2>
               <ul className="list-disc pl-5 space-y-2">
                 <li>Utilize technology and engineering to address real-world challenges faced by communities in need.</li>
@@ -38,7 +40,7 @@ export default function IEEESOUSSIGHTSBG() {
             </section>
 
             {/* About */}
-            <section className="bg-muted/30 p-8 rounded-xl shadow-lg animate-fade-in-up animation-delay-900">
+            <section className="theme-card theme-card-emerald animate-fade-in-up animation-delay-900">
               <h2 className="text-2xl font-semibold mb-6">About IEEE SOU SIGHT SBG</h2>
               <p className="mb-4">
                 IEEE SOU SIGHT SBG (Special Interest Group on Humanitarian Technology) was formed to serve society using technology for the betterment of underserved communities. It focuses on solving social issues through engineering innovations.

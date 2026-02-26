@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import OrganizationMeta from "@/components/OrganizationMeta";
 
 export default function IEEESOUSSB() {
   return (
@@ -10,12 +11,13 @@ export default function IEEESOUSSB() {
           {/* Header */}
           <div className="mb-12 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in-up">IEEE SOU SB</h1>
+            <OrganizationMeta ouCode="STB20233" nomenclature="Silver Oak University, IEEE Student Branch" />
             <div className="w-24 h-1.5 bg-primary mx-auto rounded-full mb-8 animate-fade-in-up animation-delay-300" />
           </div>
 
           <div className="prose dark:prose-invert max-w-none">
             {/* Vision Section */}
-            <section className="mb-12 bg-muted/30 p-8 rounded-xl shadow-lg animate-fade-in-up animation-delay-500">
+            <section className="mb-12 theme-card theme-card-blue animate-fade-in-up animation-delay-500">
               <h2 className="text-2xl font-semibold mb-6">Vision</h2>
               <ul className="list-disc pl-5 space-y-2">
                 <li>To be a leading hub for developing globally competitive professionals.</li>
@@ -27,7 +29,7 @@ export default function IEEESOUSSB() {
             </section>
 
             {/* Mission Section */}
-            <section className="mb-12 bg-muted/30 p-8 rounded-xl shadow-lg animate-fade-in-up animation-delay-700">
+            <section className="mb-12 theme-card theme-card-blue animate-fade-in-up animation-delay-700">
               <h2 className="text-2xl font-semibold mb-6">Mission</h2>
               <ul className="list-disc pl-5 space-y-2">
                 <li>Equip students with cutting-edge technical skills and a problem-solving mindset.</li>
@@ -39,7 +41,7 @@ export default function IEEESOUSSB() {
             </section>
 
             {/* About Section */}
-            <section className="bg-muted/30 p-8 rounded-xl shadow-lg animate-fade-in-up animation-delay-900">
+            <section className="theme-card theme-card-blue animate-fade-in-up animation-delay-900">
               <h2 className="text-2xl font-semibold mb-6">About IEEE SOU SB</h2>
               <p className="mb-4">
                 Founded in 2017 with just 17 members, IEEE SOU SB has grown into a thriving community of over 260 members, providing a platform for students to connect, learn, and grow alongside faculty and industry experts. We foster technical excellence and professional development, bridging the gap between academia and industry through workshops, expert sessions, and hands-on training.

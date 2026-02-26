@@ -22,7 +22,7 @@ export default function HeroSection() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-end justify-center overflow-hidden pt-20 pb-24 w-full"
+      className="relative min-h-screen flex items-end justify-center overflow-hidden pt-20 pb-28 w-full"
     >
       {/* Background Image with parallax */}
       <div
@@ -36,7 +36,7 @@ export default function HeroSection() {
       />
 
       {/* Overlay — dark at top, fades to page background at bottom */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/75 via-black/60 to-background/95" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
 
       {/* Animated grid lines overlay */}
       <div
@@ -66,27 +66,7 @@ export default function HeroSection() {
           </span>
         </div>
 
-        {/* Subline shimmer */}
-        <div className="reveal fade-up delay-4 mx-auto mb-8" style={{ maxWidth: 360 }}>
-          <span className="heading-line reveal delay-4 mx-auto block" style={{ maxWidth: 200 }} />
-        </div>
 
-        {/* Button */}
-        <div
-          className="flex justify-center"
-          style={{ transform: `translateY(${scrollY * -0.08}px)` }}
-        >
-          <span className="reveal pop delay-5">
-            <Button
-              size="lg"
-              variant="outline"
-              asChild
-              className="w-full sm:w-auto border-foreground text-foreground hover:bg-foreground hover:text-background dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-gray-900"
-            >
-              <a href="/events">View Events</a>
-            </Button>
-          </span>
-        </div>
       </div>
 
       {/* Scroll Down Indicator */}

@@ -1,82 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import PageLayout from "@/components/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { X } from "lucide-react";
+import { sendEmail } from "@/lib/sendEmail";
 
 export default function ContactUs() {
-  const [showNotification, setShowNotification] = useState(true);
-  const [customToast, setCustomToast] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
-    // Show notification when component mounts
-    if (showNotification) {
-      const id = toast.info(
-        <div className="flex items-start justify-between w-full">
-          <div className="text-foreground">Contact us form is inactive, kindly reach us at Apple Lab, B-120 for any queries</div>
-          <button
-            onClick={() => toast.dismiss(id)}
-            className="ml-2 p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
-          >
-            <X size={16} />
-          </button>
-        </div>,
-        {
-          duration: 5000,
-          position: "bottom-right",
-          className: "bg-background text-foreground border border-gray-200 dark:border-gray-700 shadow-lg",
-          style: {
-            fontSize: "1.1rem",
-            padding: "1.25rem",
-            backgroundColor: "var(--background)",
-            color: "var(--foreground)",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-          },
-          onDismiss: () => setShowNotification(false),
-        }
-      );
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = formRef.current;
+    if (!form) return;
 
-      // Convert the toast id to string if it's a number
-      setCustomToast(id ? String(id) : null);
+    const name = (form.querySelector("#name") as HTMLInputElement)?.value.trim();
+    const email = (form.querySelector("#email") as HTMLInputElement)?.value.trim();
+    const phone = (form.querySelector("#phone") as HTMLInputElement)?.value.trim();
+    const message = (form.querySelector("#message") as HTMLTextAreaElement)?.value.trim();
+
+    if (!name || !email) {
+      toast.error("Please fill in your name and email.");
+      return;
     }
 
-    // Auto hide notification after 10 seconds
-    const timer = setTimeout(() => {
-      setShowNotification(false);
-      if (customToast) {
-        toast.dismiss(customToast);
-      }
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.info(
-      <div className="flex items-start justify-between w-full">
-        <div className="text-foreground">Contact us form is inactive, kindly reach us at Apple Lab, B-120 for any queries</div>
-        <button
-          onClick={() => toast.dismiss()}
-          className="ml-2 p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full"
-        >
-          <X size={16} />
-        </button>
-      </div>,
-      {
-        position: "bottom-right",
-        className: "bg-background text-foreground border border-gray-200 dark:border-gray-700 shadow-lg",
-        style: {
-          fontSize: "1.1rem",
-          padding: "1.25rem",
-          backgroundColor: "var(--background)",
-          color: "var(--foreground)",
-        },
-      }
-    );
+    setIsLoading(true);
+    try {
+      await sendEmail({ name, email, phone, message, page: "Contact" });
+      toast.success("Message sent! We'll get back to you soon.");
+      form.reset();
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Failed to send message.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -92,7 +51,7 @@ export default function ContactUs() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-white dark:bg-gray-800 rounded-lg p-8 flex flex-col justify-center shadow-lg backdrop-blur-sm border border-white/20">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-foreground">Name</Label>
                   <Input id="name" placeholder="Your name" className="text-foreground" />
@@ -113,7 +72,9 @@ export default function ContactUs() {
                   <Textarea id="message" placeholder="How can we help you?" rows={4} className="text-foreground" />
                 </div>
 
-                <Button type="submit" className="w-full">Send Message</Button>
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? "Sending…" : "Send Message"}
+                </Button>
               </form>
             </div>
 
@@ -153,7 +114,7 @@ export default function ContactUs() {
                     <span className="font-medium text-foreground">Phone:</span> <span className="text-foreground">+91 79660 46304</span>
                   </li>
                   <li className="text-muted-foreground">
-                    <span className="font-medium text-foreground">Location:</span> <span className="text-foreground">Apple Lab, B-120, Silver Oak University</span>
+                    <span className="font-medium text-foreground">Location:</span> <span className="text-foreground">EA-820,E-block 8<sup>th</sup>floor, Silver Oak University</span>
                   </li>
                 </ul>
               </div>

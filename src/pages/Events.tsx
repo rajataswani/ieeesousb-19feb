@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
-import { Search } from "lucide-react";
+import { CalendarDays, Search } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 interface FirestoreEvent {
   id: string;
@@ -18,8 +18,18 @@ interface FirestoreEvent {
 }
 
 export default function Events() {
+  const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedYear, setSelectedYear] = useState<string>(
+    searchParams.get("year") ?? "all"
+  );
   const [events, setEvents] = useState<FirestoreEvent[]>([]);
+
+  // Sync selectedYear when the URL ?year param changes (e.g. navbar click)
+  useEffect(() => {
+    const yearParam = searchParams.get("year");
+    setSelectedYear(yearParam ?? "all");
+  }, [searchParams]);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -42,10 +52,27 @@ export default function Events() {
     fetchEvents();
   }, []);
 
-  const filteredEvents = events.filter((event) =>
-    event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    event.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Derive unique years from events (descending)
+  const availableYears = Array.from(
+    new Set(
+      events
+        .map((e) => {
+          const parsed = new Date(e.date);
+          return isNaN(parsed.getTime()) ? null : String(parsed.getFullYear());
+        })
+        .filter(Boolean) as string[]
+    )
+  ).sort((a, b) => Number(b) - Number(a));
+
+  const filteredEvents = events.filter((event) => {
+    const matchesSearch =
+      event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesYear =
+      selectedYear === "all" ||
+      String(new Date(event.date).getFullYear()) === selectedYear;
+    return matchesSearch && matchesYear;
+  });
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -54,10 +81,47 @@ export default function Events() {
       <main className="flex-grow pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Events</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              {selectedYear === "all" ? "Events" : `${selectedYear} Events`}
+            </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Discover our upcoming and past events, workshops, and conferences designed to enhance your technical knowledge and professional network.
             </p>
+          </div>
+
+          {/* Year filter pills */}
+          {availableYears.length > 0 && (
+            <div className="flex flex-wrap gap-2 justify-center mb-6">
+              <button
+                onClick={() => setSelectedYear("all")}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 ${selectedYear === "all"
+                  ? "bg-primary text-primary-foreground border-primary shadow-md"
+                  : "bg-background text-muted-foreground border-border hover:border-primary hover:text-primary"
+                  }`}
+              >
+                All Years
+              </button>
+              {availableYears.map((year) => (
+                <button
+                  key={year}
+                  onClick={() => setSelectedYear(year)}
+                  className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-200 ${selectedYear === year
+                    ? "bg-primary text-primary-foreground border-primary shadow-md"
+                    : "bg-background text-muted-foreground border-border hover:border-primary hover:text-primary"
+                    }`}
+                >
+                  {year}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Active year heading */}
+          <div className="flex items-center gap-3 mb-8">
+            <CalendarDays className="h-6 w-6 text-primary flex-shrink-0" />
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
+              {selectedYear === "all" ? "All Events" : `${selectedYear} Events`}
+            </h2>
           </div>
 
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
@@ -74,6 +138,9 @@ export default function Events() {
 
             <div className="text-sm text-muted-foreground">
               Showing <span className="font-semibold">{filteredEvents.length}</span> events
+              {selectedYear !== "all" && (
+                <span className="ml-1 text-primary font-medium">in {selectedYear}</span>
+              )}
             </div>
           </div>
 
