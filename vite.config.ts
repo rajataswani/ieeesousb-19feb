@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    base:"/ieeesousb-19feb",
     // Add history API fallback for SPA routing
     historyApiFallback: true,
   },

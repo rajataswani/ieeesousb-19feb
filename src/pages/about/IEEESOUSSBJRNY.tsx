@@ -7,7 +7,7 @@ function GradientBackground() {
   useEffect(() => {
     let animationFrame: number;
     const bg = bgRef.current;
-    let t = 0;
+    let t = 0;  
     function animate() {
       t += 0.01;
       const color1 = `rgb(${Math.round(58 + 40 * Math.sin(t))}, ${Math.round(110 + 60 * Math.cos(t))}, ${Math.round(95 + 30 * Math.sin(t / 2))})`;
