@@ -13,27 +13,16 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { useTheme } from "@/lib/theme-provider";
-<<<<<<< HEAD
 
 /* ---------------- NAV STRUCTURE ---------------- */
 
 const NAV_ITEMS: NavItem[] = [
   { title: "Home", href: "/" },
-
-=======
-const NAV_ITEMS: NavItem[] = [
-  {
-    title: "Home",
-    href: "/",
-  },
->>>>>>> upstream/master
   {
     title: "About",
     children: [
       { title: "IEEE", href: "/about/ieee" },
       { title: "IEEE SOU SB", href: "/about/ieee-sou-sb" },
-<<<<<<< HEAD
-
       {
         title: "GROUP",
         children: [
@@ -50,7 +39,6 @@ const NAV_ITEMS: NavItem[] = [
       },
     ],
   },
-
   {
     title: "Events",
     children: [
@@ -59,22 +47,6 @@ const NAV_ITEMS: NavItem[] = [
       { title: "2026", href: "/events?year=2026" },
     ],
   },
-
-=======
-      { title: "IEEE SOU WIE SB AG", href: "/about/ieee-sou-wie-sb-ag" },
-      { title: "IEEE SOU SPS SBC", href: "/about/ieee-sou-sps-sbc" },
-      { title: "IEEE SOU CS SBC", href: "/about/ieee-sou-cs-sbc" },
-      { title: "IEEE SOU SIGHT SBG", href: "/about/ieee-sou-sight-sbg" },
-    ],
-  },
-  {
-    title: "Events",
-    children: [
-      { title: "2024", href: "https://ieee.socet.edu.in/?author=0" },
-      { title: "2025", href: "/events" },
-    ],
-  },
->>>>>>> upstream/master
   {
     title: "Team",
     children: [
@@ -84,8 +56,6 @@ const NAV_ITEMS: NavItem[] = [
       { title: "Core Members", href: "/team/core-members" },
     ],
   },
-<<<<<<< HEAD
-
   {
     title: "Achievement",
     children: [
@@ -100,27 +70,11 @@ const NAV_ITEMS: NavItem[] = [
 
 /* ---------------- COMPONENT ---------------- */
 
-=======
-  {
-    title: "Achievement",
-    href: "/achievement",
-  },
-  {
-    title: "Bylaws",
-    href: "/bylaws",
-  },
-  {
-    title: "Contact Us",
-    href: "/contact",
-  }
-];
->>>>>>> upstream/master
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const { theme, setTheme } = useTheme();
-<<<<<<< HEAD
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -137,81 +91,41 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-=======
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-  const handleMobileDropdownToggle = (title: string) => {
-    setOpenDropdown((prev) => (prev === title ? null : title));
-  };
-  return (
-    <header
-      className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
->>>>>>> upstream/master
         isScrolled
           ? "bg-white/90 dark:bg-gray-900/90 py-2 shadow-md backdrop-blur-sm"
           : "py-4 bg-white dark:bg-gray-900"
       )}
     >
-<<<<<<< HEAD
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center h-16">
-          {/* LOGO — left */}
-          <div className="flex-shrink-0">
-            <Link to="/">
-              <img
-=======
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          {/* the below div has been changed to decrease size of dark mode (last change) */}
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
               <img
                 loading="lazy"
->>>>>>> upstream/master
                 src={
                   theme === "dark"
                     ? "http://ieee.socet.edu.in/wp-content/uploads/2025/09/Group-2085662984-1-scaled.png"
                     : "http://ieee.socet.edu.in/wp-content/uploads/2025/09/N_Wedge-removebg-preview.png"
                 }
-<<<<<<< HEAD
-                className="h-12 md:h-20 object-contain"
-              />
-            </Link>
-          </div>
-
-          {/* DESKTOP NAV — center */}
-          <nav className="hidden md:flex md:flex-1 md:items-center md:justify-center md:space-x-0.5">
-=======
                 alt="IEEE SOU SB Logo"
                 className={cn(
-                  "w-auto object-contain", // width is auto for both modes
-                  theme === "dark" ? "h-12 md:h-20" : "h-12 md:h-20", // conditional height for dark mode
-                  theme === "dark" ? "max-w-[300px]" : "max-w-[350px]" // conditional max-width for dark mode
+                  "w-auto object-contain",
+                  theme === "dark" ? "h-12 md:h-20 max-w-[300px]" : "h-12 md:h-20 max-w-[350px]"
                 )}
               />
             </Link>
           </div>
+
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex md:items-center md:space-x-1">
->>>>>>> upstream/master
+          <nav className="hidden md:flex md:flex-1 md:items-center md:justify-center md:space-x-0.5">
             {NAV_ITEMS.map((item) => (
               <React.Fragment key={item.title}>
                 {item.children ? (
                   <NavigationMenu>
                     <NavigationMenuList>
                       <NavigationMenuItem>
-<<<<<<< HEAD
                         <NavigationMenuTrigger>
                           {item.title}
                         </NavigationMenuTrigger>
@@ -221,73 +135,42 @@ export default function Navbar() {
                             {item.children.map((child) => (
                               <React.Fragment key={child.title}>
                                 {child.children ? (
-                                  <>
-                                    <p className="px-3 py-2 text-xs font-semibold text-muted-foreground text-center">
+                                  <div className="px-3 py-2">
+                                    <p className="text-xs font-semibold tracking-wide text-muted-foreground mb-2 text-left">
                                       {child.title}
                                     </p>
-
-                                    {child.children.map((nested) => (
-                                      <NavigationMenuLink asChild key={nested.title}>
-                                        <Link
-                                          to={nested.href}
-                                          className="block px-3 py-2 text-sm hover:bg-accent rounded-md text-center"
-                                        >
-                                          {nested.title}
-                                        </Link>
-                                      </NavigationMenuLink>
-                                    ))}
-                                  </>
+                                    <div className="space-y-1">
+                                      {child.children.map((nestedChild) => (
+                                        <NavigationMenuLink asChild key={nestedChild.title}>
+                                          <Link
+                                            to={nestedChild.href}
+                                            className="block select-none rounded-md px-3 py-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-left hover:pl-4"
+                                          >
+                                            {nestedChild.title}
+                                          </Link>
+                                        </NavigationMenuLink>
+                                      ))}
+                                    </div>
+                                  </div>
                                 ) : (
                                   <NavigationMenuLink asChild>
                                     <Link
-                                      to={child.href}
-                                      className="block px-3 py-2 text-sm hover:bg-accent rounded-md text-center"
+                                      to={child.href || "#"}
+                                      className="block select-none rounded-md px-3 py-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-center hover:pl-4"
                                     >
-                                      {child.title}
+                                      {child.title === "IEEE SOU SB" ? (
+                                        <img
+                                          src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SOU-SB-Logo-scaled.png"
+                                          alt="IEEE SOU SB Logo"
+                                          className="h-10 mx-auto object-contain"
+                                        />
+                                      ) : (
+                                        child.title
+                                      )}
                                     </Link>
                                   </NavigationMenuLink>
                                 )}
                               </React.Fragment>
-=======
-                        <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                          <div className="w-60 p-2">
-                            {item.children.map((child) => (
-                              <NavigationMenuLink asChild key={child.title}>
-                                <Link
-                                  to={child.href}
-                                  className="block select-none rounded-md px-3 py-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-center hover:pl-4"
-                                >
-                                  {child.title === "IEEE" ? (
-                                    <img
-                                      src="/images/ieee-logo.png"
-                                      alt="IEEE Logo"
-                                      className="h-6 mx-auto object-contain brightness-100 dark:brightness-100 dark:invert"
-                                    />
-                                  ) : child.title === "IEEE SOU SB" ? (
-                                    <img
-                                      src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SOU-SB-Logo-scaled.png"
-                                      alt="IEEE SOU SB Logo"
-                                      className="h-10 mx-auto object-contain"
-                                    />
-                                  ) : child.title === "IEEE SOU WIE SB AG" ? (
-                                    <img
-                                      src="http://ieee.socet.edu.in/wp-content/uploads/2025/12/IEEE-SOU-WIE-AG-Logo-Coloured-scaled.png"
-                                      alt="IEEE SOU WIE Logo"
-                                      className="h-12 mx-auto object-contain"
-                                    />
-                                  ) : child.title === "IEEE SOU SPS SBC" ? (
-                                    <img
-                                      src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SPS-SOU-SBC-Full-Color.png"
-                                      alt="IEEE SOU SPS Logo"
-                                      className="h-14 mx-auto object-contain"
-                                    />
-                                  ) : (
-                                    child.title
-                                  )}
-                                </Link>
-                              </NavigationMenuLink>
->>>>>>> upstream/master
                             ))}
                           </div>
                         </NavigationMenuContent>
@@ -296,44 +179,16 @@ export default function Navbar() {
                   </NavigationMenu>
                 ) : (
                   <Link
-<<<<<<< HEAD
-                    to={item.href}
-                    className="px-2 py-2 text-sm font-medium hover:text-primary whitespace-nowrap"
-=======
                     to={item.href || "#"}
-                    className="block px-3 py-2 rounded-md text-sm font-medium hover:text-primary transition-colors"
->>>>>>> upstream/master
+                    className="px-2 py-2 text-sm font-medium hover:text-primary whitespace-nowrap transition-colors"
                   >
                     {item.title}
                   </Link>
                 )}
               </React.Fragment>
             ))}
-<<<<<<< HEAD
-          </nav>
 
-          {/* ACTION BUTTONS — right */}
-          <div className="hidden md:flex flex-shrink-0 items-center gap-2">
-            <Button variant="outline" size="sm" asChild>
-              <Link to="/join">Join IEEE</Link>
-            </Button>
-
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </Button>
-          </div>
-
-          {/* MOBILE BUTTON */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X /> : <Menu />}
-          </Button>
-=======
-
+            {/* Action Buttons — right */}
             <div className="flex items-center gap-2 ml-2">
               <Button
                 variant="outline"
@@ -353,6 +208,7 @@ export default function Navbar() {
               </Button>
             </div>
           </nav>
+
           {/* Mobile Menu Button */}
           <div className="flex md:hidden">
             <Button
@@ -367,6 +223,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
       {/* Mobile Dropdown */}
       <div
         className={cn(
@@ -394,40 +251,43 @@ export default function Navbar() {
                   {openDropdown === item.title && (
                     <div className="pl-4 space-y-1">
                       {item.children.map((child) => (
-                        <Link
-                          key={child.title}
-                          to={child.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="block px-3 py-2 rounded-md text-xs font-medium hover:bg-secondary transition-all duration-200 text-left hover:pl-5"
-                        >
-                          {child.title === "IEEE" ? (
-                            <img
-                              src="/images/ieee-logo.png"
-                              alt="IEEE Logo"
-                              className="h-5 object-contain dark:invert"
-                            />
-                          ) : child.title === "IEEE SOU SB" ? (
-                            <img
-                              src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SOU-SB-Logo-scaled.png"
-                              alt="IEEE SOU SB Logo"
-                              className="h-8 object-contain"
-                            />
-                          ) : child.title === "IEEE SOU WIE SB AG" ? (
-                            <img
-                              src="http://ieee.socet.edu.in/wp-content/uploads/2025/12/IEEE-SOU-WIE-AG-Logo-Coloured-scaled.png"
-                              alt="IEEE SOU WIE Logo"
-                              className="h-10 object-contain"
-                            />
-                          ) : child.title === "IEEE SOU SPS SBC" ? (
-                            <img
-                              src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SPS-SOU-SBC-Full-Color.png"
-                              alt="IEEE SOU SPS Logo"
-                              className="h-12 object-contain"
-                            />
+                        <React.Fragment key={child.title}>
+                          {child.children ? (
+                            <div className="px-3 py-1">
+                              <p className="text-[10px] font-semibold tracking-wide text-muted-foreground mb-1">
+                                {child.title}
+                              </p>
+                              <div className="space-y-1">
+                                {child.children.map((nestedChild) => (
+                                  <Link
+                                    key={nestedChild.title}
+                                    to={nestedChild.href}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="block px-3 py-2 rounded-md text-xs font-medium hover:bg-secondary transition-all duration-200 text-left hover:pl-5"
+                                  >
+                                    {nestedChild.title}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
                           ) : (
-                            child.title
+                            <Link
+                              to={child.href || "#"}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="block px-3 py-2 rounded-md text-xs font-medium hover:bg-secondary transition-all duration-200 text-left hover:pl-5"
+                            >
+                              {child.title === "IEEE SOU SB" ? (
+                                <img
+                                  src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SOU-SB-Logo-scaled.png"
+                                  alt="IEEE SOU SB Logo"
+                                  className="h-8 object-contain"
+                                />
+                              ) : (
+                                child.title
+                              )}
+                            </Link>
                           )}
-                        </Link>
+                        </React.Fragment>
                       ))}
                     </div>
                   )}
@@ -473,13 +333,8 @@ export default function Navbar() {
               )}
             </Button>
           </div>
->>>>>>> upstream/master
         </div>
       </div>
     </header>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> upstream/master

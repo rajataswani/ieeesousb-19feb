@@ -20,6 +20,10 @@ import UpcomingEvents from "./pages/UpcomingEvents";
 import Contact from "./pages/Contact";
 import Join from "./pages/Join";
 import NotFound from "./pages/NotFound";
+import Newsletter from "./pages/Newsletter"; 
+import StudentAchievements from "./pages/StudentAchievements";
+import BranchAwards from "./pages/BranchAwards";
+import UpcomingEvents from "./pages/UpcomingEvents";
 // About Pages
 import IEEE from "./pages/about/IEEE";
 import IEEESOUSSB from "./pages/about/IEEESOUSSB";
@@ -88,6 +92,10 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/join" element={<Join />} />
+              <Route path="/newsletter" element={<Newsletter />} />
+              <Route path="/awards/student" element={<StudentAchievements />} />
+              <Route path="/awards/branch" element={<BranchAwards />} />
+              <Route path="/upcoming-events" element={<UpcomingEvents />} />
               {/* About Pages */}
               <Route path="/about/ieee" element={<IEEE />} />
               <Route path="/about/ieee-sou-sb" element={<IEEESOUSSB />} />

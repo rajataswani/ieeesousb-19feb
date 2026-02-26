@@ -14,8 +14,13 @@ export type NavItem = {
 =======
   children?: {
     title: string;
-    href: string;
+    href?: string;
     description?: string;
+    children?: {
+      title: string;
+      href: string;
+      description?: string;
+    }[];
   }[];
 >>>>>>> upstream/master
 };
