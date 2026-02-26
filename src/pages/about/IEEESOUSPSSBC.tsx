@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export default function IEEESOUSPSSBC() {
   return (
@@ -59,7 +58,6 @@ export default function IEEESOUSPSSBC() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

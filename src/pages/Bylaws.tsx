@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { ScrollText, ChevronRight } from "lucide-react";
 
 export const metadata = {
@@ -212,7 +211,6 @@ export default function Bylaws() {
                 </div>
             </main>
 
-            <Footer />
         </div>
     );
 }

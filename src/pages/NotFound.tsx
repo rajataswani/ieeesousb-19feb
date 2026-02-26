@@ -2,7 +2,6 @@
 import { useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
@@ -19,7 +18,7 @@ export default function NotFound() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      
+
       <main className="flex-grow flex items-center justify-center py-24">
         <div className="text-center px-4">
           <h1 className="text-6xl md:text-8xl font-bold text-primary mb-6">404</h1>
@@ -35,8 +34,7 @@ export default function NotFound() {
           </Button>
         </div>
       </main>
-      
-      <Footer />
+
     </div>
   );
 }

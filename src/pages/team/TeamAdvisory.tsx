@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Search, Linkedin } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import { db } from "@/firebase"; // Adjust path if needed
@@ -84,8 +83,8 @@ export default function TeamAdvisory() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filtered.map(member => (
-              <div 
-                key={member.id} 
+              <div
+                key={member.id}
                 className={`rounded-lg overflow-hidden shadow-sm transition-all duration-300
                   bg-white dark:bg-gray-900
                   ${HOVER_EFFECT}
@@ -94,9 +93,9 @@ export default function TeamAdvisory() {
                 <div className="p-6">
                   <div className="flex items-start mb-4">
                     <div className="w-16 h-16 min-w-16 rounded-full overflow-hidden mr-4">
-                      <img 
-                        src={member.image} 
-                        alt={member.name} 
+                      <img
+                        src={member.image}
+                        alt={member.name}
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
@@ -109,10 +108,10 @@ export default function TeamAdvisory() {
                       <div className="flex items-center">
                         <h3 className="font-bold text-lg text-black dark:text-white">{member.name}</h3>
                         {member.linkedin && (
-                          <a 
-                            href={member.linkedin} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
+                          <a
+                            href={member.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="ml-2 text-primary hover:text-primary/80 dark:text-primary-dark dark:hover:text-primary-dark/80"
                             onClick={(e) => e.stopPropagation()}
                           >
@@ -126,14 +125,13 @@ export default function TeamAdvisory() {
                     <p className="text-gray-600 dark:text-gray-300"><span className="font-medium">Current Profession:</span> {member.education}</p>
                     {/* <p className="text-gray-600 dark:text-gray-300"><span className="font-medium">Designation:</span> {member.designation}</p> */}
                     {/* <p className="text-gray-600 dark:text-gray-300"><span className="font-medium">Enrolled:</span> {member.createdAt?.toDate()?.getFullYear()}</p> */}
-                  </div>  
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

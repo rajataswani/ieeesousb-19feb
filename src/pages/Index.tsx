@@ -49,7 +49,7 @@ export default function Index() {
   }, []);
 
   return (
-    <PageLayout>
+    <PageLayout showFooter>
       <HeroSection />
       <WhyJoinSection />
       <FAQButtonSection />

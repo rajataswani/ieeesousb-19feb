@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Search, Linkedin } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 import { db } from "@/firebase";
@@ -172,7 +171,6 @@ export default function TeamFaculty() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

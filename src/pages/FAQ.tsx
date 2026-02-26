@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { HelpCircle, ChevronRight } from "lucide-react";
 
 export const metadata = {
@@ -170,7 +169,6 @@ export default function FAQ() {
                 </div>
             </main>
 
-            <Footer />
         </div>
     );
 }

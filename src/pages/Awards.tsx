@@ -3,7 +3,6 @@ import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase"; // Adjust path if needed
 import { Search } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom"; // ✅ Import Link for routing
@@ -101,7 +100,6 @@ export default function Awards() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

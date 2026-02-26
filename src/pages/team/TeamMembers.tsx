@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Search, Linkedin } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { db } from "@/firebase"; // Import Firebase configuration
 import { collection, query, where, getDocs } from "firebase/firestore";
 
@@ -95,7 +94,6 @@ export default function TeamMembers() {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

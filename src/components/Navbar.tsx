@@ -23,17 +23,28 @@ const NAV_ITEMS: NavItem[] = [
     children: [
       { title: "IEEE", href: "/about/ieee" },
       { title: "IEEE SOU SB", href: "/about/ieee-sou-sb" },
-      { title: "IEEE SOU WIE SB AG", href: "/about/ieee-sou-wie-sb-ag" },
-      { title: "IEEE SOU SPS SBC", href: "/about/ieee-sou-sps-sbc" },
-      { title: "IEEE SOU CS SBC", href: "/about/ieee-sou-cs-sbc" },
-      { title: "IEEE SOU SIGHT SBG", href: "/about/ieee-sou-sight-sbg" },
+      {
+        title: "GROUP",
+        children: [
+          { title: "IEEE SOU WIE AG", href: "/about/ieee-sou-wie-sb-ag" },
+          { title: "IEEE SOU SIGHT SBG", href: "/about/ieee-sou-sight-sbg" },
+        ],
+      },
+      {
+        title: "CHAPTER",
+        children: [
+          { title: "IEEE SOU SPS SBC", href: "/about/ieee-sou-sps-sbc" },
+          { title: "IEEE SOU CS SBC", href: "/about/ieee-sou-cs-sbc" },
+        ],
+      },
     ],
   },
   {
     title: "Events",
     children: [
       { title: "2024", href: "https://ieee.socet.edu.in/?author=0" },
-      { title: "2025", href: "/events" },
+      { title: "2025", href: "/events?year=2025" },
+      { title: "2026", href: "/events?year=2026" },
     ],
   },
   {
@@ -45,7 +56,7 @@ const NAV_ITEMS: NavItem[] = [
       { title: "Core Members", href: "/team/core-members" },
     ],
   },
- {
+  {
     title: "Achievements",
     children: [
       { title: "Branch Awards", href: "/awards/branch" },
@@ -123,40 +134,44 @@ export default function Navbar() {
                         <NavigationMenuContent>
                           <div className="w-60 p-2">
                             {item.children.map((child) => (
-                              <NavigationMenuLink asChild key={child.title}>
-                                <Link
-                                  to={child.href}
-                                  className="block select-none rounded-md px-3 py-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-center hover:pl-4"
-                                >
-                                  {child.title === "IEEE" ? (
-                                    <img
-                                      src="/images/ieee-logo.png"
-                                      alt="IEEE Logo"
-                                      className="h-6 mx-auto object-contain brightness-100 dark:brightness-100 dark:invert"
-                                    />
-                                  ) : child.title === "IEEE SOU SB" ? (
-                                    <img
-                                      src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SOU-SB-Logo-scaled.png"
-                                      alt="IEEE SOU SB Logo"
-                                      className="h-10 mx-auto object-contain"
-                                    />
-                                  ) : child.title === "IEEE SOU WIE SB AG" ? (
-                                    <img
-                                      src="http://ieee.socet.edu.in/wp-content/uploads/2025/12/IEEE-SOU-WIE-AG-Logo-Coloured-scaled.png"
-                                      alt="IEEE SOU WIE Logo"
-                                      className="h-12 mx-auto object-contain"
-                                    />
-                                  ) : child.title === "IEEE SOU SPS SBC" ? (
-                                    <img
-                                      src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SPS-SOU-SBC-Full-Color.png"
-                                      alt="IEEE SOU SPS Logo"
-                                      className="h-14 mx-auto object-contain"
-                                    />
-                                  ) : (
-                                    child.title
-                                  )}
-                                </Link>
-                              </NavigationMenuLink>
+                              <React.Fragment key={child.title}>
+                                {child.children ? (
+                                  <div className="px-3 py-2">
+                                    <p className="text-xs font-semibold tracking-wide text-muted-foreground mb-2 text-left">
+                                      {child.title}
+                                    </p>
+                                    <div className="space-y-1">
+                                      {child.children.map((nestedChild) => (
+                                        <NavigationMenuLink asChild key={nestedChild.title}>
+                                          <Link
+                                            to={nestedChild.href}
+                                            className="block select-none rounded-md px-3 py-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-left hover:pl-4"
+                                          >
+                                            {nestedChild.title}
+                                          </Link>
+                                        </NavigationMenuLink>
+                                      ))}
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <NavigationMenuLink asChild>
+                                    <Link
+                                      to={child.href || "#"}
+                                      className="block select-none rounded-md px-3 py-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground text-center hover:pl-4"
+                                    >
+                                      {child.title === "IEEE SOU SB" ? (
+                                        <img
+                                          src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SOU-SB-Logo-scaled.png"
+                                          alt="IEEE SOU SB Logo"
+                                          className="h-10 mx-auto object-contain"
+                                        />
+                                      ) : (
+                                        child.title
+                                      )}
+                                    </Link>
+                                  </NavigationMenuLink>
+                                )}
+                              </React.Fragment>
                             ))}
                           </div>
                         </NavigationMenuContent>
@@ -234,40 +249,43 @@ export default function Navbar() {
                   {openDropdown === item.title && (
                     <div className="pl-4 space-y-1">
                       {item.children.map((child) => (
-                        <Link
-                          key={child.title}
-                          to={child.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="block px-3 py-2 rounded-md text-xs font-medium hover:bg-secondary transition-all duration-200 text-left hover:pl-5"
-                        >
-                          {child.title === "IEEE" ? (
-                            <img
-                              src="/images/ieee-logo.png"
-                              alt="IEEE Logo"
-                              className="h-5 object-contain dark:invert"
-                            />
-                          ) : child.title === "IEEE SOU SB" ? (
-                            <img
-                              src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SOU-SB-Logo-scaled.png"
-                              alt="IEEE SOU SB Logo"
-                              className="h-8 object-contain"
-                            />
-                          ) : child.title === "IEEE SOU WIE SB AG" ? (
-                            <img
-                              src="http://ieee.socet.edu.in/wp-content/uploads/2025/12/IEEE-SOU-WIE-AG-Logo-Coloured-scaled.png"
-                              alt="IEEE SOU WIE Logo"
-                              className="h-10 object-contain"
-                            />
-                          ) : child.title === "IEEE SOU SPS SBC" ? (
-                            <img
-                              src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SPS-SOU-SBC-Full-Color.png"
-                              alt="IEEE SOU SPS Logo"
-                              className="h-12 object-contain"
-                            />
+                        <React.Fragment key={child.title}>
+                          {child.children ? (
+                            <div className="px-3 py-1">
+                              <p className="text-[10px] font-semibold tracking-wide text-muted-foreground mb-1">
+                                {child.title}
+                              </p>
+                              <div className="space-y-1">
+                                {child.children.map((nestedChild) => (
+                                  <Link
+                                    key={nestedChild.title}
+                                    to={nestedChild.href}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="block px-3 py-2 rounded-md text-xs font-medium hover:bg-secondary transition-all duration-200 text-left hover:pl-5"
+                                  >
+                                    {nestedChild.title}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
                           ) : (
-                            child.title
+                            <Link
+                              to={child.href || "#"}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="block px-3 py-2 rounded-md text-xs font-medium hover:bg-secondary transition-all duration-200 text-left hover:pl-5"
+                            >
+                              {child.title === "IEEE SOU SB" ? (
+                                <img
+                                  src="http://ieee.socet.edu.in/wp-content/uploads/2025/06/IEEE-SOU-SB-Logo-scaled.png"
+                                  alt="IEEE SOU SB Logo"
+                                  className="h-8 object-contain"
+                                />
+                              ) : (
+                                child.title
+                              )}
+                            </Link>
                           )}
-                        </Link>
+                        </React.Fragment>
                       ))}
                     </div>
                   )}

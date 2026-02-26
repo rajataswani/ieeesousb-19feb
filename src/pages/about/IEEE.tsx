@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export default function IEEE() {
   return (
@@ -54,7 +53,6 @@ export default function IEEE() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

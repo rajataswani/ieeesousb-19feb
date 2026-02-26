@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export default function IEEESOUSSIGHTSBG() {
   return (
@@ -52,7 +51,6 @@ export default function IEEESOUSSIGHTSBG() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

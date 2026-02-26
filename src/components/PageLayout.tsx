@@ -5,11 +5,13 @@ import Footer from './Footer';
 type PageLayoutProps = {
   children: React.ReactNode;
   className?: string;
+  showFooter?: boolean;
 };
 
 export default function PageLayout({
   children,
   className = '',
+  showFooter = false,
 }: PageLayoutProps) {
   return (
     <div className="flex flex-col min-h-screen w-full overflow-hidden">
@@ -17,7 +19,7 @@ export default function PageLayout({
       <main className={`flex-grow w-full ${className}`}>
         {children}
       </main>
-      <Footer />
+      {showFooter && <Footer />}
     </div>
   );
 }

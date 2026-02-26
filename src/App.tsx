@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/lib/theme-provider"; // Make sure this is a valid path
 import { TooltipProvider } from "@/components/ui/tooltip"; // Ensure these components are available
@@ -9,7 +9,7 @@ import InitialLoader from "@/components/InitialLoader";
 // Main Pages
 import Index from "./pages/Index";
 import Events from "./pages/Events";
-import Awards from "./pages/Awards";
+import Achievement from "./pages/Achievement";
 import Contact from "./pages/Contact";
 import Join from "./pages/Join";
 import NotFound from "./pages/NotFound";
@@ -57,7 +57,9 @@ function App() {
               {/* Main Pages */}
               <Route path="/" element={<Index />} />
               <Route path="/events" element={<Events />} />
-              <Route path="/awards" element={<Awards />} />
+              <Route path="/achievement" element={<Achievement />} />
+              <Route path="/achievements" element={<Navigate to="/achievement" replace />} />
+              <Route path="/awards" element={<Navigate to="/achievement" replace />} />
               <Route path="/bylaws" element={<Bylaws />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/contact" element={<Contact />} />

@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { Search, Linkedin } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
@@ -212,19 +211,19 @@ export default function Members() {
   });
 
   useEffect(() => {
-    const filtered = ALL_MEMBERS.filter(member => 
+    const filtered = ALL_MEMBERS.filter(member =>
       member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       member.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
       member.designation.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    
+
     // Sort student members by type: executive first, then core, then regular members
     const filteredStudents = filtered.filter(m => m.type === "executive" || m.type === "core" || m.type === "member");
     filteredStudents.sort((a, b) => {
       const typeOrder = { executive: 1, core: 2, member: 3 };
       return typeOrder[a.type as "executive" | "core" | "member"] - typeOrder[b.type as "executive" | "core" | "member"];
     });
-    
+
     setFilteredMembers({
       faculty: filtered.filter(m => m.type === "faculty"),
       advisory: filtered.filter(m => m.type === "advisory"),
@@ -233,7 +232,7 @@ export default function Members() {
   }, [searchTerm]);
 
   const getBadgeVariant = (type: string) => {
-    switch(type) {
+    switch (type) {
       case "executive":
         return "default";
       case "core":
@@ -246,7 +245,7 @@ export default function Members() {
   };
 
   const getBadgeStyle = (type: string) => {
-    switch(type) {
+    switch (type) {
       case "executive":
         return "bg-amber-500 hover:bg-amber-600 border-none";
       case "core":
@@ -259,7 +258,7 @@ export default function Members() {
   };
 
   const getBadgeText = (type: string) => {
-    switch(type) {
+    switch (type) {
       case "executive":
         return "exe";
       case "core":
@@ -275,7 +274,7 @@ export default function Members() {
 
   const renderMemberSection = (title: string, members: MemberType[]) => {
     if (members.length === 0) return null;
-    
+
     return (
       <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6 border-l-4 border-primary pl-3">{title}</h2>
@@ -284,17 +283,17 @@ export default function Members() {
             <div key={member.id} className="glass rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
               <div className="p-6">
                 <div className="flex items-start mb-4">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
+                  <img
+                    src={member.image}
+                    alt={member.name}
                     className="w-16 h-16 rounded-full object-cover mr-4"
                   />
                   <div>
                     <div className="flex items-center">
                       <h3 className="font-bold text-lg">{member.name}</h3>
-                      <a 
-                        href={member.linkedinUrl} 
-                        target="_blank" 
+                      <a
+                        href={member.linkedinUrl}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="ml-2 text-primary hover:text-primary/80"
                       >
@@ -324,7 +323,7 @@ export default function Members() {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      
+
       <main className="flex-grow pt-24 pb-16 animate-fade-in">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
@@ -333,7 +332,7 @@ export default function Members() {
               Meet the dedicated team behind IEEE SOU Student Branch who are working to create a vibrant technical community.
             </p>
           </div>
-          
+
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
             <div className="relative w-full md:w-96">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
@@ -345,19 +344,18 @@ export default function Members() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            
+
             <div className="text-sm text-muted-foreground">
               Showing <span className="font-semibold">{totalFilteredCount}</span> members
             </div>
           </div>
-          
+
           {renderMemberSection("Faculty Members", filteredMembers.faculty)}
           {renderMemberSection("Advisory Board", filteredMembers.advisory)}
           {renderMemberSection("Student Members", filteredMembers.students)}
         </div>
       </main>
-      
-      <Footer />
+
     </div>
   );
 }
